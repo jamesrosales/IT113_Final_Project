@@ -1,0 +1,252 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block pageTitle %} About {% endblock pageTitle %}
+{% block pageResources %}
+<!-- Owl Stylesheet -->
+<link rel="stylesheet" href="{% static 'assets/owlcarousel/owlcarousel/assets/owl.carousel.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/owlcarousel/owlcarousel/assets/owl.theme.default.min.css' %}">
+
+<!-- JavaScript -->
+<script src="{% static 'assets/owlcarousel/vendors/jquery.min.js' %}"></script>
+<script src="{% static 'assets/owlcarousel/owlcarousel/owl.carousel.js' %}"></script>
+{% endblock pageResources %}
+{% block pageContent %}
+
+<!-- Header Start -->
+<div class="container-fluid bg-primary py-5 mb-5 page-header"
+	style="background: url({%static 'base/img/ban/bn/banner.png'%});background-size:fit;">
+	<div class="container py-5">
+		<div class="row justify-content-center">
+			<div class="col-lg-10 text-center">
+				<h1 class="display-3 text-white animated slideInDown">About Us</h1>
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb justify-content-center">
+						<li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+						<li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
+						<li class="breadcrumb-item text-white active" aria-current="page">About</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Header End -->
+
+<!-- About Start -->
+<div class="container-xxl py-5">
+	<div class="container">
+		<div class="row g-5">
+			<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+				<div class="position-relative h-100">
+					<img class="img-fluid position-absolute w-100 h-100" src="{% static 'base/img/extension-logo.png'%}"
+						alt="" style="object-fit: cover;">
+				</div>
+			</div>
+			<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+				<h1 class="mb-4">Welcome to Extension Services Program</h1>
+				<p class="mb-4">Capacitating community and its people through trainings, workshops and knowledge
+					transfer as an extension service.</p>
+				<p class="mb-4">Extension services are the vehicles that link the major sectors of society for the
+					purpose of developing and enhancing
+					capabilities of inidividuals and groups (POs, NGOs) to aleviate their socio-economic conditions.
+					Through extension and community outreach
+					programs of the State University, learning beyond classrooms may have a new meaning, as
+					modalities shall be tested to develop
+					and enhance capabilities of the Caraganons.
+				</p>
+				<!--<div class="row gy-2 gx-4 mb-4">
+					<div class="col-sm-6">
+						<p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Skilled Lecturers</p>
+					</div>
+					<div class="col-sm-6">
+						<p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Online Classes</p>
+					</div>
+					<div class="col-sm-6">
+						<p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>International Certificate</p>
+					</div>
+					<div class="col-sm-6">
+						<p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Skilled Instructors</p>
+					</div>
+					<div class="col-sm-6">
+						<p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Online Classes</p>
+					</div>
+					<div class="col-sm-6">
+						<p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>International Certificate</p>
+					</div>
+				</div>-->
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-xxl py-5">
+	<div class="container">
+		<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+			
+			<h1 class="mb-5">Extension Services Objectives</h1>
+		</div>
+
+		<div class="row g-4 justify-content-center">
+			<div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+				<div class="course-item pb-4">
+					<div class="position-relative overflow-hidden">
+						<img class="img-fluid" src="{% static 'base/img/gif/default-background.gif'%}" alt="">
+					</div>
+					<div class="py-4 pb-0">
+						<p class="mb-4">The Extension and Community Outreach Service endeavors to:
+						</p>
+						<li class="mb-4"><b>Reduce poverty and generate employment</b> through the effort in packaging,
+							disseminating
+							and utilizing technologies for rural development;
+						</li>
+					</div>
+					<div class="py-2 pb-0">
+						<li class="mb-4"><b>Serve individuals and communities</b> through extension service programs in
+							Sustainable Upland or Low Land
+							Resource Development, Responsible Mining, Human Capital Building Through Improving
+							Literacy Technical and Vocational Courses, Engineering, Education and Other Fields
+							for Practical Applications; and
+						</li>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+				<div class="course-item pb-4">
+					<div class="position-relative overflow-hidden">
+						<img class="img-fluid" src="{% static 'base/img/gif/default-background2.gif'%}" alt="">
+					</div>
+					<div class="py-4 pb-0">
+						<li class="mb-4"><b>Attain Excellence</b> in Community Service</li>
+						<ul>
+							<div class="col-sm-12">
+								<p class="mb-2"><i class="fa fa-arrow-right text-primary me-2"></i>Improving indigenous
+									and rural technology</p>
+							</div>
+							<div class="col-sm-12">
+								<p class="mb-2"><i class="fa fa-arrow-right text-primary me-2"></i>Supporting provincial
+									and regional development directions through linkages with NGOs, LGUs and other
+									sectors;</p>
+							</div>
+							<div class="col-sm-12">
+								<p class="mb-2"><i class="fa fa-arrow-right text-primary me-2"></i>Cultivating values
+									and culture toward attaining improved quality of life in rural communities;</p>
+							</div>
+							<div class="col-sm-12">
+								<p class="mb-2"><i class="fa fa-arrow-right text-primary me-2"></i>Playing major role in
+									the making of important and relevant policies;</p>
+							</div>
+							<div class="col-sm-12">
+								<p class="mb-2"><i class="fa fa-arrow-right text-primary me-2"></i>Training the
+									lower-and-middle level manpower in agriculture, wood and mineral-based industries
+									and other related endeavors;</p>
+							</div>
+							<div class="col-sm-12">
+								<p class="mb-2"><i class="fa fa-arrow-right text-primary me-2"></i>Conducting outreach
+									programs on literacy and occupational skills for various sectors in the service
+									area.</p>
+							</div>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- About End -->
+
+<!-- Program Start -->
+<div class="container-xxl py-5">
+	<div class="container">
+		{% if extensionprogram_count > 0 %}
+		<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+			<h1 class="mb-5">Extension Programs</h1>
+		</div>
+		<div class="row g-4 justify-content-center">
+			{% for extensionprogram in extensionprogram_list %}
+			<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+				<div class="course-item bg-white shadow p-3 mb-5 rounded" style="height: 400px">
+					<div class="position-relative overflow-hidden">
+						<img class="img-fluid" src="{% static 'base/img/default-background.png'%}" alt="">
+						<div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
+							<a href="{% url 'program-detail' extensionprogram.slug extensionprogram.id %}"
+								class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end"
+								style="border-radius: 30px 0 0 30px;">Read More</a>
+						</div>
+					</div>
+					<div class="text-center p-4 pb-0">
+						<h5 class="mb-4">{{ extensionprogram.title}}</h5>
+						<small class="">{{ extensionprogram.shortdescription}}</small>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		{% else %}
+		<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+			<h6 class="section-title bg-white text-center text-primary px-3">Program</h6>
+			<h5 class="mb-5">This section is currently empty.</h5>
+		</div>
+		{% endif %}
+	</div>
+	{% if extensionprogram_count > 4 %}
+			<center><a class="btn btn-primary py-3 px-5 mt-5 wow fadeInUp" href="{% url 'program-list' %}">See More</a></center>
+		{% endif %}
+</div>
+<!-- Program End -->
+
+<!-- Team Start -->
+<div class="container-xxl py-5">
+	<div class="container">
+		{% if facilitator_count > 0 %}
+		<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+			<h1 class="mb-5">Meet the Team</h1>
+		</div>
+		<div class="row g-4">
+			<div class="owl-carousel">
+				{% for user in facilitator_list %}
+				<div class="item col-lg-10 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
+					<div class="team-item bg-light">
+						<div class="overflow-hidden text-center">
+							<img class="img-fluid" src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}{{ MEDIA_URL }}/default/default-avatar.png{% endif %}">
+						</div>
+						<div class="text-center p-4">
+							<h5 class="mb-0">{{user.first_name}} {{user.last_name}}</h5>
+							<small>Software Developer</small>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			{% else %}
+			<div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+				<h6 class="section-title bg-white text-center text-primary px-3">Team</h6>
+				<h5 class="mb-5">This section is currently empty.</h5>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+<!-- Team End -->
+{% endblock pageContent %}
+{% block ScriptBlock %}
+<script>
+	var owl = $('.owl-carousel');
+	owl.owlCarousel({
+		margin: 10,
+		autoplay: true,
+		autoplaySpeed: 1000,
+		loop: true,
+		responsive: {
+			0: {
+				items: 1
+			},
+			600: {
+				items: 2
+			},
+			1000: {
+				items: 4
+			}
+		}
+	})
+</script>
+{% endblock ScriptBlock %}

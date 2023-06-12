@@ -1,0 +1,116 @@
+{% extends 'workshop/base.html' %}
+{% load static %}
+{% block pageTitle %}{{ lessonactivity.title }}{% endblock pageTitle %}
+{% block pageResources %}
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'workshop/css/styles.css' %}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+{% endblock pageResources %}
+{% block pageContent %}
+<!-- Lesson Activity Start -->
+
+<main class="col-lg-9" style="min-height:80vh">
+    <h2 class="mb-4">{{ lessonactivity.title }}</h2>
+    {{lessonactivity.description|safe}}
+    <div class="container-xxl py-5">
+        <div class="container">
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td>Title</td>
+                        <td>{{lessonactivity.title}}</td>
+                    </tr>
+                    <tr>
+                        <td>Deadline</td>
+                        <td>{{lessonactivity.deadline}}</td>
+                    </tr>
+                    <tr>
+                        <td>Submission</td>
+                        {% if activityoutput and activityoutput.lessonactivity.id == lessonactivity.id and activityoutput.participant.participant == request.user %}
+                            {% if activityoutput.file %}
+                                <td><a href="http://127.0.0.1:8000{{ activityoutput.file.url }}"
+                                    target="_blank">{{activityoutput.file.url|slice:"28:"}}</a> | 
+                                    {% if activityoutput.date_updated %}
+                                    {{activityoutput.date_updated}}</td>
+                                    {% else %}
+                                    {{activityoutput.time_submitted}}</td>
+                                    {% endif %}
+                            {% else %}
+                                <td>{% if activityoutput.date_updated %}
+                                    {{activityoutput.date_updated}}</td>
+                                    {% else %}
+                                    {{activityoutput.time_submitted}}</td>
+                                    {% endif %}
+                            {% endif %}
+                        {% else %}
+                            <td><i>No submission</i></td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td>Score</td>
+                        {% if activityoutput and activityoutput.lessonactivity.id == lessonactivity.id  and activityoutput.participant.participant == request.user%}
+                            {% if activityoutput.is_checked %}
+                            <td>{{activityoutput.score}}/{{lessonactivity.total_items}}</td>
+                            {% else %}
+                            <td><i>No score yet</i>/{{lessonactivity.total_items}}</td>
+                            {% endif %}
+                        {% else %}
+                            <td><i>No submission</i></td>
+                        {% endif %}
+                    </tr>    
+                    <tr>
+                        <td>Feedback</td>
+                        {% if activityoutput and activityoutput.lessonactivity.id == lessonactivity.id  and activityoutput.participant.participant == request.user%}
+                            {% if activityoutput.feedback %}
+                            <td>{{activityoutput.feedback|safe}}</td>
+                            {% else %}
+                            <td><i>No feedback yet</i></td>
+                            {% endif %}
+                        {% else %}
+                            <td><i>No submission</i></td>
+                        {% endif %}
+                    </tr>                  
+                </tbody>
+            </table>
+    
+            {% if activityoutput and activityoutput.lessonactivity.id == lessonactivity.id  and activityoutput.participant.participant == request.user%}
+                <a class="btn btn-primary py-3 px-5 mt-2" href="{% url 'update-activityoutput' activityoutput.pk %}">Edit submission</a>
+            {% else %}
+                <a class="btn btn-primary py-3 px-5 mt-2" href="{% url 'submit-activityoutput' lessonactivity.id %}">Add submission</a>
+            {% endif %}
+        </div>
+    </div>
+</main>
+
+<!-- Lesson Activity End -->
+
+{% include "workshop/output-modal.html" %}
+
+<script>
+    $(document).on("click", ".open-submit-form", function (e) {
+      e.preventDefault();
+      var $popup = $("#popup");
+      var popup_url = $(this).data("popup-url");
+      $(".modal-body", $popup).load(popup_url, function () {
+        $popup.modal("show");
+      });
+    });
+
+    $(document).on("click", ".open-update-form", function (e) {
+        e.preventDefault();
+        var $popup = $("#popup");
+        var popup_url = $(this).data("popup-url");
+        $(".modal-body", $popup).load(popup_url, function () {
+          $popup.modal("show");
+        });
+      });
+</script>
+
+{% endblock pageContent %}

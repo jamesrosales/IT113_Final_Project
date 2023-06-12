@@ -1,0 +1,93 @@
+{% extends 'workshop/base.html' %}
+{% load static %}
+{% block pageTitle %}{{ lessonactivity.title }}{% endblock pageTitle %}
+{% block pageResources %}
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap) -->
+    <link href="{% static 'workshop/css/styles.css' %}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{% static 'datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+{% endblock pageResources %}
+{% block pageContent %}
+<!-- Lesson Activity Start -->
+
+<main class="col-lg-9" style="min-height:80vh">
+    <h2 class="mb-4">{{ lessonactivity.title }}</h2>
+    {{lessonactivity.description|safe}}
+    <div class="container-xxl py-5">
+        <div class="container">
+        {% for workshopfacilitator in workshopfacilitator_list %}
+            {% if activityoutput_count == 0 and workshopfacilitator.facilitator.member.member.email == request.user.email %}
+                    <table id="outputs" class="display table shadow p-3 mb-5 bg-white rounded" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Submission</th>
+                                <th scope="col">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for activityoutput in activityoutput_list %}
+                            {% if activityoutput.lessonactivity.lesson.workshop == workshop and activityoutput.lessonactivity == lessonactivity %}
+                            <tr>
+                                <td>{{activityoutput.participant}}</td>
+                                <td><a href="http://127.0.0.1:8000{{ activityoutput.file.url }}"
+                                    target="_blank">{{activityoutput.file.url|slice:"28:"}}</a</td>
+                                {% if activityoutput.score %}
+                                <td>activityoutput.score</td>
+                                {% else %}
+                                <td>No score yet</td>
+                                {% endif %}
+                            </tr>
+                            {% endif %}
+                         {% endfor %}
+                        </tbody>
+                    </table>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+</main>
+
+<!-- Lesson Activity End -->
+
+{% include "workshop/output-modal.html" %}
+{% endblock pageContent %}
+
+{% block ScriptBlock %}
+<script>
+    $(function () {
+      $("#outputs").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#posts_wrapper .col-md-6:eq(0)');
+    });
+</script>
+
+<!-- jQuery -->
+<script src="{% static 'jquery/jquery.min.js' %}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{% static 'jquery-ui/jquery-ui.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- DataTables  & Plugins -->
+<script src="{% static 'datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'jszip/jszip.min.js' %}"></script>
+<script src="{% static 'pdfmake/pdfmake.min.js' %}"></script>
+<script src="{% static 'pdfmake/vfs_fonts.js' %}"></script>
+<script src="{% static 'datatables-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'datatables-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+{% endblock ScriptBlock %}

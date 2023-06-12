@@ -1,0 +1,172 @@
+{% load static %}
+<!-- Sidenav Start -->
+
+<aside class="col-lg-3"> 
+    <nav class="sidebar py-2 mb-4">
+    {% url 'submit-activityoutput' lessonactivity.id as submiturl %}
+    {% url 'update-activityoutput' activityoutput.pk as updateurl %}
+    
+        <ul class="nav flex-column" id="nav_accordion">
+            {% if request.path == submiturl %}
+            <li class="nav-item">
+                <small><a class="nav-link" href="{% url 'lessonactivity-detail-p' lessonactivity.slug lessonactivity.id %}">Go back</a></small>
+            </li>
+            {% elif request.path == updateurl %}
+            <li class="nav-item">
+                <small><a class="nav-link" href="{% url 'lessonactivity-detail-p' activityoutput.lessonactivity.slug activityoutput.lessonactivity.id %}">Go back</a></small>
+            </li>
+        </ul>
+    {% else %}
+        <ul class="nav flex-column" id="nav_accordion">
+            {% url 'workshop-detail' workshop.slug workshop.id as workshopurl %} 
+            {% url 'lesson-detail' workshop.id lesson.slug lesson.id as lessonurl %}
+            {% url 'lessonactivity-detail-p' lessonactivity.slug lessonactivity.id as activitypurl %}
+            {% url 'lessonactivity-detail-f' lessonactivity.slug lessonactivity.id as activityfurl %}
+            {% if request.path == workshopurl %}
+            <li class="nav-item">
+                <small><a class="nav-link" href="{% url 'workshop-detail' workshop.slug workshop.id %}">Overview</a></small>
+            </li>
+            {% elif request.path == lessonurl %}
+            <li class="nav-item">
+                <small><a class="nav-link" href="{% url 'workshop-detail' lesson.workshop.slug lesson.workshop.id %}">Overview</a></small>
+            </li>
+            {% elif request.path == activitypurl or request.path == activityfurl %}
+            <li class="nav-item">
+                <small><a class="nav-link" href="{% url 'workshop-detail' lessonactivity.lesson.workshop.slug lessonactivity.lesson.workshop.id %}">Overview</a></small>
+            </li>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+                {% if request.user.is_facilitator or request.user.is_superuser %}
+                    {% if lesson_count > 0%}
+                        <li class="nav-item">
+                            {% for lesson in lesson_list %}
+                                <label type="submit" for="lesson{{lesson.id}}">
+                                    <small><a class="nav-link" data-bs-toggle="collapse" data-bs-target="#menu_item{{lesson.id}}" href="#"> {{ lesson.title }} <i class="bi small bi-caret-down-fill"></i></a></small>
+                                </label><br>
+                                    
+                                    <ul id="menu_item{{lesson.id}}" class="submenu collapse" data-bs-parent="#nav_accordion">
+                                        <li>
+                                            <img class="img-fluid" src="{% static 'base/img/doc.png'%}" width="30px" alt="">
+                                            <label >
+                                                <small><a class="nav-link" href="{% url 'lesson-detail' workshop.id lesson.slug lesson.id %}">Description</a></small>
+                                                </label><br>
+                                        </li>
+                                {% for lessonfile in lessonfile_list %}
+                                    {% if lessonfile.lesson.id == lesson.id %}
+                                        <li>
+                                            {% if lessonfile.file.url|slice:"-4:" == ".doc" or lessonfile.file.url|slice:"-5:" == ".docx" %}
+                                            <img class="img-fluid" src="{% static 'base/img/doc.png'%}" width="30px" alt="">
+                                            {% elif lessonfile.file.url|slice:'-4:' == ".pdf"%}
+                                            <img class="img-fluid" src="{% static 'base/img/pdf.png'%}" width="30px" alt="">
+                                            {% elif lessonfile.file.url|slice:'-4:' == ".ppt" or lessonfile.file.url|slice:'-5:' == ".pptx" %}
+                                            <img class="img-fluid" src="{% static 'base/img/ppt.png'%}" width="30px" alt="">
+                                            {% elif lessonfile.file.url|slice:'-4:' == 'xls' or lessonfile.file.url|slice:'-5:' == ".xlsx" %}
+                                            <img class="img-fluid" src="{% static 'base/img/xls.png'%}" width="30px" alt="">
+                                            {% endif %}
+                                                <label for="lessonfile{{lessonfile.id}}">
+                                                    <small><a class="nav-link" href="http://127.0.0.1:8000{{ lessonfile.file.url }}"
+                                                    target="_blank"> {{lessonfile.title}}</a></small>
+                                                </label><br>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% for lessonactivity in lessonactivity_list %}
+                                    {% if lessonactivity.lesson.id == lesson.id %}
+                                        <li>
+                                            <img class="img-fluid" src="{% static 'base/img/activity.png'%}" width="30px" alt="">
+                                            
+                                            <label for="lessonactivity{{lessonactivity.id}}">
+                                                <small><a class="nav-link" href="{% url 'lessonactivity-detail-f' lessonactivity.slug lessonactivity.id %}"> 
+                                                {{lessonactivity.title}}</a></small>
+                                            </label><br>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                                    </ul>
+                                    
+                            {% endfor %}
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <small class="wow fadeInUp nav-link">This section is currently empty.</small>
+                        </li>
+                    {% endif %}
+                {% elif request.user.is_participant %}                
+                    {% for workshopparticipant in workshopparticipant_list %}
+                        {% if workshopparticipant.participant == request.user and workshopparticipant.workshop.id == workshop.id %}
+                            {% if lesson_count > 0 %}
+                                <li class="nav-item">
+                                    {% for lesson in lesson_list %}
+                                        <label type="submit" for="lesson{{lesson.id}}">
+                                            <small><a class="nav-link" data-bs-toggle="collapse" data-bs-target="#menu_item{{lesson.id}}" href="#"> {{ lesson.title }} <i class="bi small bi-caret-down-fill"></i></a></small>
+                                        </label><br>
+                                            
+                                            <ul id="menu_item{{lesson.id}}" class="submenu collapse" data-bs-parent="#nav_accordion">
+                                                <li>
+                                                    <img class="img-fluid" src="{% static 'base/img/doc.png'%}" width="30px" alt="">
+                                                    <label >
+                                                        <small><a class="nav-link" href="{% url 'lesson-detail' workshop.id lesson.slug lesson.id %}">Description</a></small>
+                                                        </label><br>
+                                                </li>
+                                        {% for lessonfile in lessonfile_list %}
+                                            {% if lessonfile.lesson.id == lesson.id %}
+                                                <li>
+                                                    {% if lessonfile.file.url|slice:"-4:" == ".doc" or lessonfile.file.url|slice:"-5:" == ".docx" %}
+                                                    <img class="img-fluid" src="{% static 'base/img/doc.png'%}" width="30px" alt="">
+                                                    {% elif lessonfile.file.url|slice:'-4:' == ".pdf"%}
+                                                    <img class="img-fluid" src="{% static 'base/img/pdf.png'%}" width="30px" alt="">
+                                                    {% elif lessonfile.file.url|slice:'-4:' == ".ppt" or lessonfile.file.url|slice:'-5:' == ".pptx" %}
+                                                    <img class="img-fluid" src="{% static 'base/img/ppt.png'%}" width="30px" alt="">
+                                                    {% elif lessonfile.file.url|slice:'-4:' == 'xls' or lessonfile.file.url|slice:'-5:' == ".xlsx" %}
+                                                    <img class="img-fluid" src="{% static 'base/img/xls.png'%}" width="30px" alt="">
+                                                    {% endif %}
+                                                        <label for="lessonfile{{lessonfile.id}}">
+                                                            <small><a class="nav-link" href="http://127.0.0.1:8000{{ lessonfile.file.url }}"
+                                                            target="_blank"> {{lessonfile.title}}</a></small>
+                                                        </label><br>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        {% for lessonactivity in lessonactivity_list %}
+                                            {% if lessonactivity.lesson.id == lesson.id %}
+                                                <li>
+                                                    <img class="img-fluid" src="{% static 'base/img/activity.png'%}" width="30px" alt="">
+                                                    
+                                                    <label for="lessonactivity{{lessonactivity.id}}">
+                                                        <small><a class="nav-link" href="{% url 'lessonactivity-detail-p' lessonactivity.slug lessonactivity.id %}"> 
+                                                        {{lessonactivity.title}}</a></small>
+                                                    </label><br>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                            </ul>
+                                    {% endfor %}
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <small class="wow fadeInUp nav-link">This section is currently empty.</small>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <li class="nav-item">
+                        <small class="wow fadeInUp nav-link">You currently don't have access to this workshop. Please contact the administrator
+                            if you think this is a mistake.</small>
+                    </li>
+                {% endif %}
+            {% else %}
+                <li class="nav-item">
+                    <small class="wow fadeInUp nav-link">You need to be logged in to access this section.</small>
+                </li>
+            {% endif %}     
+        </ul>
+    {% endif %}
+    </nav>
+</aside>
+
+<!-- Sidenav End -->
+
+

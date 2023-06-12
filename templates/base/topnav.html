@@ -1,0 +1,84 @@
+{% load static %}
+<!-- Navbar Start -->
+
+<nav class="navbar navbar-expand-lg bg-white navbar-light p-0">
+    <a href="{% url 'home-page' %}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <img src="{% static 'base/img/extension-logo.png' %}" width="50" alt="Extension Logo" loading="lazy"
+            style="margin-top: -3px;" />
+    </a>
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0">
+            {% url 'home-page' as url %}
+            <a href="{% url 'home-page' %}"
+                class="nav-item nav-link {% if request.path == url %}active{% endif %}">Home</a>
+            {% url 'about-us' as url %}
+            <a href="{% url 'about-us' %}"
+                class="nav-item nav-link {% if request.path == url %}active{% endif %}">About</a>
+            {% url 'program-list' as url %}
+            <a href="{% url 'program-list' %}"
+                class="nav-item nav-link {% if request.path == url %}active{% endif %}">Programs</a>
+            {% url 'workshop-list' as url %}
+            <a href="{% url 'workshop-list' %}"
+                class="nav-item nav-link {% if request.path == url %}active{% endif %}">Workshops</a>
+            {% url 'blog-list' as url %}
+            <a href="{% url 'blog-list' %}"
+                class="nav-item nav-link {% if request.path == url %}active{% endif %}">Activities</a>
+            {% url 'contact-us' as url %}
+            <a href="{% url 'contact-us' %}"
+                class="nav-item nav-link {% if request.path == url %}active{% endif %}">Contact</a>
+            {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <span class=""><img
+                            src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}{{ MEDIA_URL }}/default/default-avatar.png{% endif %}"
+                            width="20px" id="user-avatar" class="img-custom-thumbnailrounded-circle"></span>
+                    {{ request.user.first_name }} {{ request.user.last_name }}
+                </a>
+                <div class="dropdown-menu fade-down m-0">
+                    <a href="{% url 'admin:index' %}" target="_blank" class="dropdown-item">Dashboard</a>
+                    <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+                    <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                </div>
+            </div>
+            {% elif user.is_facilitator %}
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <span class=""><img
+                            src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}{{ MEDIA_URL }}/default/default-avatar.png{% endif %}"
+                            width="20px" id="user-avatar" class="img-custom-thumbnail rounded-circle"></span>
+                    {{ request.user.first_name }} {{ request.user.last_name }}
+                </a>
+                <div class="dropdown-menu fade-down m-0">
+                    <a href="{% url 'admin:index' %}" target="_blank" class="dropdown-item">Dashboard</a>
+                    <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+                    <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                </div>
+            </div>
+            {% elif user.is_participant %}
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <span class=""><img
+                            src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}{{ MEDIA_URL }}/default/default-avatar.png{% endif %}"
+                            width="20px" id="user-avatar" class="img-custom-thumbnail rounded-circle"></span>
+                    {{ request.user.first_name }} {{ request.user.last_name }}
+                </a>
+                <div class="dropdown-menu fade-down m-0">
+                    <a href="{% url 'my-workshops' %}" class="dropdown-item">Dashboard</a>
+                    <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+                    <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% else %}
+        <a href="{% url 'login' %}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">LOGIN<i
+                class="fa fa-arrow-right ms-3"></i></a>
+        {% endif %}
+    </div>
+</nav>
+
+<!-- Navbar End -->

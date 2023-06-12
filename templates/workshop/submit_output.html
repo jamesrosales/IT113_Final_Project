@@ -1,0 +1,60 @@
+{% extends 'workshop/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block pageTitle %}Submit Activity Output{% endblock pageTitle %}
+{% block pageResources %}
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'workshop/css/styles.css' %}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+
+{% endblock pageResources %}
+{% block pageContent %}
+<!-- Submit Activity Output Start -->
+<main class="col-lg-9" style="min-height:80vh">
+    <h2 class="mb-4">Add Submission</h2>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {% if error_message %}
+                      <div class="alert alert-danger">
+                        <strong>{{ error_message }}</strong>
+                      </div>
+                    {% endif %}
+                    <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if form %}
+                        {{form.media}}
+                        <div class="mdc-layout-grid">
+                            <div class="mdc-layout-grid__inner">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        {% for field in form %}
+                                        <div class="form-group mb-3">
+                                            {{field|as_crispy_field}}
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <a class="btn btn-danger py-3 px-5 mt-2" href="{% url 'lessonactivity-detail-p' lessonactivity.slug lessonactivity.id %}">Cancel</a>
+                                        <button type="submit" class="btn btn-primary py-3 px-5 mt-2">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Submit Activity Output End -->
+{% endblock pageContent %}
+

@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block pageTitle %} My Profile {% endblock pageTitle %}
+{% block pageContent %}
+
+<!-- Header Start -->
+<div class="container-fluid bg-primary py-5 mb-5 page-header"
+    style="background: linear-gradient(rgba(24, 29, 56, .7), rgba(24, 29, 56, .7)), url({%static 'base/img/carousel-2.jpg'%});">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h1 class="display-3 text-white animated slideInDown">My Profile</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">My Profile</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- Profile Start -->
+<div class="">
+    <div class="row justify-content-center">
+        <div class="col-lg-9 col-md-10 col-sm-12 col-xs-12">
+            <div class="container-fluid">
+                <div class="row">
+                    {% include 'registrations/sidenav.html' %}
+                    <div class="col-md-8 p-5 form-group">
+                        <dl>
+                            <dt class="text-muted">Name</dt>
+                            <dd class="ps-4 form-control">{{ user.first_name }} {{ user.last_name }}</dd>
+                            <dt class="text-muted">Email</dt>
+                            <dd class="ps-4 form-control">{{ user.email }}</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Profile End -->
+{% endblock pageContent %}

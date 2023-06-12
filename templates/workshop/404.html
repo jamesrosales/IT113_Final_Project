@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>404 - Page Not Found</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta content="" name="keywords">
+	<meta content="" name="description">
+
+	<!-- Favicon -->
+	<link href="{% static 'base/img/favicon.ico' %}" rel="icon">
+
+	<!-- Google Web Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+		rel="stylesheet">
+
+	<!-- Icon Font Stylesheet -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+	<!-- Libraries Stylesheet -->
+	<link href="{% static 'base/lib/animate/animate.min.css' %}" rel="stylesheet">
+	<link href="{% static 'base/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+	<!-- Customized Bootstrap Stylesheet -->
+	<link href="{% static 'base/css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'bootsrap/css/bootstrap.css' %}" rel="stylesheet">
+
+	<!-- Template Stylesheet -->
+	<link href="{% static 'base/css/style.css' %}" rel="stylesheet">
+
+	<link rel="stylesheet" href="{% static 'assets/font-awesome/css/all.min.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/select2/dist/css/select2.min.css' %}">
+
+	<script src="{% static 'assets/font-awesome/js/all.min.js' %}"></script>
+	<script src="{% static 'assets/default/js/jquery-3.6.0.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'assets/default/js/script.js' %}"></script>
+<style>
+	.page_404 {
+		padding: 5vw;
+		background:#fff;
+   }
+	.page_404 img{
+		width:100%;
+   }
+	.four_zero_four_bg {
+		background-position: center;
+   }
+	.four_zero_four_bg h1 {
+		font-size:80px;
+   }
+	.four_zero_four_bg h3 {
+		font-size:80px;
+   }
+	.link_404 {
+		color: #fff!important;
+		padding: 10px 20px;
+		background: #39ac31;
+		margin: 20px 0;
+		display: inline-block;
+   }
+	.contant_box_404 {
+		margin-top:-50px;
+   }
+   
+   	.attri {
+		position: fixed;
+		padding: 10px 10px 0px 10px;
+		bottom: 0;
+		width: 100%;
+		height: 50px;
+   }
+</style>
+</head>
+<body>
+	<div class="page_404 container-fluid">
+		<div class="container">
+			<div class="row">	
+				<div class="col-lg-12">
+					<div class="col-sm-12 col-sm-offset-1  text-center">
+						<div class="four_zero_four_bg">
+							<img class="img-fluid" src="https://img.freepik.com/free-vector/error-404-page-found-confused-characters_107791-13163.jpg?w=996&t=st=1672848464~exp=1672849064~hmac=ba417d19a089281a91c83dde8f7b92452cb760cfac103491a542d01b72f62f09" width="60vw" alt="">
+						</div>
+			
+						<div class="contant_box_404 p-5">
+							<h3 class="h2">
+							PAGE NOT FOUND
+							</h3>
+							<p>Looks like the page you're looking for may have been moved, deleted <br> or possibly never existed.</p>
+							<a class="btn btn-primary py-3 px-5 mt-2" href="{% url 'home-page' %}">Go to Home</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="attribution">
+			<small><a href="https://www.freepik.com/free-vector/error-404-page-found-confused-characters_28998047.htm#query=404%20not%20found%20orange%20png&position=13&from_view=search&track=ais">Image by upklyak</a> on Freepik</small>
+		</div>
+	</div>
+</body>
+</html>

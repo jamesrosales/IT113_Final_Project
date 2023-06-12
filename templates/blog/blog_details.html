@@ -1,0 +1,34 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block pageTitle %}{{ blog.title }}{% endblock pageTitle %}
+{% block pageContent %}
+
+<!-- Header Start -->
+<div class="container-fluid bg-primary py-5 mb-5 page-header" 
+style="background: url({%static 'base/img/hd/bloghd.png'%});">
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <h1 class="display-3 text-white animated slideInDown">{{ blog.title }}</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a class="text-white" href="#">Blog</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">{{ blog.title }}</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- Blog Detail Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        {{blog.body|safe}}
+    </div>
+</div>
+<!-- Blog Detail End -->
+{% endblock pageContent %}
